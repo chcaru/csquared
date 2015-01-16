@@ -1,0 +1,124 @@
+
+//Parallel programming lock test:
+
+var counter = 0;
+
+var bigLockFunc = () => {
+	var i = 0;
+	while(i < 250000){
+		lock (counter){
+			counter = counter + 1;
+		}
+		i = i + 1;
+	}
+
+	println(counter);
+};
+
+var filler = (count, func) => {
+	var list = { };
+	var i = 0;
+	while(i < count){ 
+		list <- func;
+		i = i + 1;
+	}
+	return list;
+};
+
+var bigLockFuncs = filler(16, bigLockFunc);
+
+println("Parallel lock test (not for speed! read comments):");
+
+
+println("Synchronous foreach (press enter to start):");
+input();
+
+//This is a normal synchronous foreach iterator
+//It will increment the counter by 250000 during each iteration
+foreach(func in bigLockFuncs){
+	func();
+}
+println("counter: " + counter);
+
+counter = 0;
+
+
+
+println("Parallel foreach (press enter to start):");
+input();
+
+//This iterator will spawn a new thread for each enumration
+//of the enumerable (essentially a list).
+
+//The threads are put into a thread pool that manages
+//distribution of threads on available processors.
+//It's typical that you will see "chucks" of iterations finish
+//which are equal to the number of logical cores in 
+//the system.
+
+//Each iteration will simultaneously update the counter.
+//It is expected that the counter will be different from 250000,
+//because they are updating the counter concurently
+
+//In func() (above as bigLockFunc), the counter is locked, updated,
+//and then released using my language's "lock" functionality, which
+//provides mutual exclusion for the identifier specified. Statements 
+//inside the lock block are allowed to access the identifier and update it,
+//any other access to this value will block the accessing thread
+//while the lock is executing its block
+
+//The bigLockFunc used here is not to demostrate speed, but rather that
+//cross thread access works. The bigLockFunc is not designed optimally 
+//on purpose, that is, to show that the counter can be updated concurently.
+
+parallel foreach(func in bigLockFuncs){
+	func();
+}
+println("counter: " + counter);
+
+counter = 0;
+
+//Parallel programming test
+println("Parallel programming test (speed test! read comments):");
+
+var bigFunc = () => {
+	var i = 0;
+	while(i < 400000){
+		i = i + 1;
+	}
+	lock(counter) {
+		counter = counter + i;
+	}
+
+	println(counter);
+};
+
+var bigFuncs = filler(16, bigFunc);
+
+println("Synchronous foreach:");
+input();
+
+//Run the new bigFunc in a normal synchronous manner
+foreach(func in bigFuncs){
+	func();
+}
+println("counter: " + counter);
+
+counter = 0;
+
+println("Parallel foreach:");
+input();
+
+//The new bigFunc here demonstrates the speed up that can
+//be achieved when using parallel execution and a
+//better design of bigLockFunc (namely that the counter is 
+//only locked once per thread, when it is time to update it). 
+
+//Although the speedup is system determinant, on my computer
+//a speedup 4.5 times faster is achieved, with 8 logical cores
+
+parallel foreach(func in bigFuncs){
+	func();
+}
+
+println("counter: " + counter);

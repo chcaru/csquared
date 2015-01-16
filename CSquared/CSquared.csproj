@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9392B017-F94A-4B97-91F7-F272F38F7EEC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CSquared</RootNamespace>
+    <AssemblyName>CSquared</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Evaluator\Environment.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\Expressions\AsyncExpression.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\ReturnStatement.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\LockStatement.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\ParallelForeachStatement.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\ReturnCarrier.cs" />
+    <Compile Include="Evaluator\ICastable.cs" />
+    <Compile Include="Evaluator\IIndexable.cs" />
+    <Compile Include="Evaluator\InternalTypes\Primaries\Array.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\Expressions\BinaryOperationExpression.cs" />
+    <Compile Include="Evaluator\Evaluables\ElseContainer.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\ForeachStatement.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\IfStatement.cs" />
+    <Compile Include="Evaluator\InternalTypes\Primaries\Object.cs" />
+    <Compile Include="Evaluator\InternalTypes\Primary.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\Expressions\UnaryOperationExpression.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\VariableAssignment.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\VariableDeclaration.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\LambdaCall.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\Expressions\LambdaExpression.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\WhileStatement.cs" />
+    <Compile Include="Evaluator\Evaluables\Statements\YieldStatement.cs" />
+    <Compile Include="Evaluator\Evaluator.cs" />
+    <Compile Include="Evaluator\IEvaluable.cs" />
+    <Compile Include="Evaluator\IInitializable.cs" />
+    <Compile Include="Evaluator\CSquaredInitializer.cs" />
+    <Compile Include="Evaluator\InternalTypes\Primaries\Boolean.cs" />
+    <Compile Include="Evaluator\InternalTypes\Primaries\Identifier.cs" />
+    <Compile Include="Evaluator\InternalTypes\Primaries\Integer.cs" />
+    <Compile Include="Evaluator\InternalTypes\Primaries\IPrimary.cs" />
+    <Compile Include="Evaluator\InternalTypes\Primaries\Null.cs" />
+    <Compile Include="Evaluator\InternalTypes\Primaries\Real.cs" />
+    <Compile Include="Evaluator\InternalTypes\Primaries\String.cs" />
+    <Compile Include="Evaluator\SpecialTypes\CountExpression.cs" />
+    <Compile Include="Evaluator\SpecialTypes\EmptyExpression.cs" />
+    <Compile Include="Evaluator\SpecialTypes\InjectExpression.cs" />
+    <Compile Include="Evaluator\SpecialTypes\InputExpression.cs" />
+    <Compile Include="Evaluator\SpecialTypes\InternalExpression.cs" />
+    <Compile Include="Evaluator\SpecialTypes\TypeCheckExpression.cs" />
+    <Compile Include="Evaluator\SpecialTypes\PrintExpression.cs" />
+    <Compile Include="Evaluator\SpecialTypes\PrintlnExpression.cs" />
+    <Compile Include="Evaluator\SpecialTypes\CastExpression.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="LexicalAnalyzer\Lexeme.cs" />
+    <Compile Include="LexicalAnalyzer\Lexer.cs" />
+    <Compile Include="LexicalAnalyzer\Reader.cs" />
+    <Compile Include="Parser\Parser.cs" />
+    <Compile Include="Parser\Types\Statements\Expressions\Array.cs" />
+    <Compile Include="Parser\Types\ElseContainer.cs" />
+    <Compile Include="Parser\Types\Statements\Expressions\AsyncExpression.cs" />
+    <Compile Include="Parser\Types\Statements\Expressions\BinaryOperationExpression.cs" />
+    <Compile Include="Parser\Types\Statements\Expressions\Expression.cs" />
+    <Compile Include="Parser\Types\Statements\Expressions\IExpression.cs" />
+    <Compile Include="Parser\Types\Statements\ForeachStatement.cs" />
+    <Compile Include="Parser\Types\IdentifierDeclaration.cs" />
+    <Compile Include="Parser\Types\Statements\IfStatement.cs" />
+    <Compile Include="Parser\Types\Statements\Expressions\LambdaCall.cs" />
+    <Compile Include="Parser\Types\Statements\Expressions\LambdaExpression.cs" />
+    <Compile Include="Parser\Types\Statements\Expressions\Object.cs" />
+    <Compile Include="Parser\Types\Program.cs" />
+    <Compile Include="Parser\Types\Statements\IStatement.cs" />
+    <Compile Include="Parser\Types\Statements\Expressions\UnaryOperationExpression.cs" />
+    <Compile Include="Parser\Types\Statements\LockStatement.cs" />
+    <Compile Include="Parser\Types\Statements\ParallelForeachStatement.cs" />
+    <Compile Include="Parser\Types\Statements\ReturnStatement.cs" />
+    <Compile Include="Parser\Types\Statements\VariableAssignment.cs" />
+    <Compile Include="Parser\Types\Statements\VariableDeclaration.cs" />
+    <Compile Include="Parser\Types\Statements\WhileStatement.cs" />
+    <Compile Include="Parser\Types\Statements\YieldStatement.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

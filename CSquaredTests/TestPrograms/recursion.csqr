@@ -1,0 +1,15 @@
+
+var fib = (n) => {
+	if (n <= 1){
+		return 1;
+	}	
+	return fib(n - 1) + fib(n - 2);
+};
+
+println("fib(0):  " + fib(0));
+println("fib(1):  " + fib(1));
+println("fib(2):  " + fib(2));
+println("fib(3):  " + fib(3));
+println("fib(4):  " + fib(4));
+println("fib(10): " + fib(10));
+println("fib(20): " + fib(20));

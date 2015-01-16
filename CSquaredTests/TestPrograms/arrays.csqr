@@ -1,0 +1,20 @@
+
+//Create an array of size 1000
+var array = ["first", "second"](1000);
+
+//Set items in array
+array[2] = "third";
+array[999] = "last";
+array[499] = "middle";
+
+//Print items from array
+println("0:   " + array[0]);
+println("1:   " + array[1]);
+println("2:   " + array[2]);
+println("499: " + array[499]);
+println("999: " + array[999]);
+
+//Should be null, no value has been set
+println("3:   " + array[3]);
+println("300: " + array[300]);
+println("998: " + array[998]);

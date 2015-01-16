@@ -1,0 +1,11 @@
+
+var printThisNumber = (number) => {
+	println("The number is " + number);	
+};
+
+var funcExec = (func, n) => {
+	func(n);	
+};
+
+funcExec(printThisNumber, 2);
+funcExec(printThisNumber, 42);

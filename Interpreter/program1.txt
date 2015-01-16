@@ -1,0 +1,77 @@
+﻿var exp = (num, pow) => {
+	if (pow == 0){
+		return num;
+	}
+	return exp(num, pow - 1);
+};
+
+var qaz = exp;
+
+var getOperator = (op) => {
+	if (op == "+") { 
+		return (x, y) => x + y;
+	}
+	else if(op == "-"){
+		return (x, y) => x - y;
+	}
+	else if(op == "*"){
+		return (x, y) => x * y;
+	}
+	else if(op == "/"){
+		return (x, y) => x / y;
+	}
+	else if(op == "^"){
+		return (x, y) => exp(x, y);
+	}
+	return null;
+};
+
+println("Please enter a RPN expression:");
+var rpnInput = input();
+
+var rpnStack = {  };
+
+var digits = "";
+
+var unloadDigits = () => {
+
+	if (digits != ""){
+
+		rpnStack <- toReal(digits);
+
+		digits = "";
+	}
+};
+
+var object = { };
+
+foreach(char in rpnInput){
+	if (char != " "){
+
+		var op = getOperator(char);
+
+		if (!op){
+			digits = digits + char;
+		}
+		else {
+
+			unloadDigits();
+
+			var b;
+			var a;
+
+			rpnStack -> b;
+			rpnStack -> a;
+
+			rpnStack <- op(a, b);
+		}
+	}
+	else {
+		unloadDigits();
+	}
+}
+
+var result;
+rpnStack -> result;
+
+println(result);

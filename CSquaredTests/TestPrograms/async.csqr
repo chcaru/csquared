@@ -1,0 +1,41 @@
+
+//Asynchronous programming test:
+
+var testAsyncFunc = () => {
+	var index = 0;
+	while (index < 1500000){
+		index = index + 1;
+	}
+	return "done";
+};
+
+//When using the "async" modifier, my lang wraps
+//the following expression into an asynchronous
+//expression which first starts evaluation of an expression
+//and then returns itself. 
+
+//When the expression is accessed again,
+//it's value is returned if the asynchronous function has
+//finished evaulation. Otherwise it will block the calling thread.
+
+//Async expressions may also use the lock statement.
+//Async expressions may also be used inside parallel 
+//iterators.
+
+var testAsyncVala = async testAsyncFunc();
+var testAsyncValb = async testAsyncFunc();
+
+//This is printed while the asynchronous testAsyncFuncs are being
+//executed.
+
+println("while running");
+
+//This will obtain a lock on the main thread,
+//until the first testAsyncFunc has finished execution,
+//returning control to the main thread and the evaluated value
+
+print("Blocking val1: ");
+println(testAsyncVala);
+
+print("Blocking val2: ");
+println(testAsyncValb);

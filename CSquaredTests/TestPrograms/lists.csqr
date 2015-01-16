@@ -1,0 +1,49 @@
+
+//A stack which builds and uses
+//a linked list structure 
+var stackObject = {
+			
+	var head = null;	
+	var tail = null;
+
+	var push = (item) => {
+		var node = {
+			var val = item;
+			var next = null;
+			var prev = null;
+		};
+
+		if (!head){
+			head = node;
+			tail = node;
+		}
+		else {
+			node["prev"] = tail;
+			tail["next"] = node;
+
+			tail = node;
+		}
+	};
+
+	var pop = () => {
+		if (!tail){
+			return null;
+		}
+
+		var node = tail;
+		tail = tail.prev;
+
+		return node.val;
+	};
+};
+
+stackObject.push(1);
+stackObject.push(3);
+stackObject.push(5);
+stackObject.push(7);
+
+println(stackObject.pop());
+println(stackObject.pop());
+println(stackObject.pop());
+println(stackObject.pop());
+println(stackObject.pop());

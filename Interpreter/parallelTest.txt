@@ -1,0 +1,112 @@
+﻿println("Hello World");
+
+
+//Asynchronous programming test:
+
+var testAsyncFunc = () => {
+	var index = 0;
+	while (index < 500000){
+		index = index + 1;
+	}
+	return "done";
+};
+
+var testAsyncVala = async testAsyncFunc();
+var testAsyncValb = async testAsyncFunc();
+
+println("while running");
+
+print("blocking val1: ");
+println(testAsyncVala);
+
+print("blocking val2: ");
+println(testAsyncValb);
+
+println("after running");
+
+
+
+//Parallel programming lock test:
+println("Parallel lock test (not for speed):");
+
+var counter = 0;
+
+var bigLockFunc= () => {
+	var i = 0;
+	while(i < 250000){
+		lock (counter){
+			counter = counter + 1;
+		}
+		i = i + 1;
+	}
+
+	println(counter);
+};
+
+var filler = (count, func) => {
+	var list = {};
+	var i = 0;
+	while(i < count){ 
+		list <- func;
+		i = i + 1;
+	}
+	return list;
+};
+
+var bigLockFuncs = filler(16, bigLockFunc);
+
+println("Synchronous foreach:");
+input();
+
+foreach(func in bigLockFuncs){
+	func();
+}
+println("counter: " + counter);
+
+counter = 0;
+
+println("Parallel foreach:");
+input();
+
+parallel foreach(func in bigLockFuncs){
+	func();
+}
+println("counter: " + counter);
+
+counter = 0;
+
+//Parallel programming test
+println("Parallel programming test:");
+
+var bigFunc = () => {
+	var i = 0;
+	while(i < 400000){
+		i = i + 1;
+	}
+	lock(counter) {
+		counter = counter + i;
+	}
+
+	println(counter);
+};
+
+var bigFuncs = filler(16, bigFunc);
+
+println("Synchronous foreach:");
+input();
+
+foreach(func in bigFuncs){
+	func();
+}
+println("counter: " + counter);
+
+counter = 0;
+
+println("Parallel foreach:");
+input();
+
+parallel foreach(func in bigFuncs){
+	func();
+}
+
+println("counter: " + counter);
