@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Csquared : CSquared is an interpreted programming language implemented completely in C#.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Csquared</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/chcaru/csquared">View on GitHub</a>
+
+          <h1 id="project_title">Csquared</h1>
+          <h2 id="project_tagline">CSquared is an interpreted programming language implemented completely in C#.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/chcaru/csquared/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/chcaru/csquared/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="variables" class="anchor" href="#variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Variables</h1>
+
+<p>Example variable declaration:</p>
+
+<pre><code>var myVar = 0;
+</code></pre>
+
+<p>All variable declarations must be preceded with "var."
+Identifiers must be ALL letters (no numbers ect...)!</p>
+
+<p>Assignment:</p>
+
+<pre><code>myVar = "a string";
+myVar = 5.4;
+myVar = true;
+myVar = false;
+</code></pre>
+
+<p>Intergers, Reals, Strings, Booleans, Objects, Arrays, Lambdas, and Lambda Calls are supported for declaration/assignment.</p>
+
+<p>*Strings are enumerable.
+*Reals must be "full," and cannot be partial (.0 or 0. is not valid, 0.0 is)
+*Objects, Arrays, Lambdas, and Lambda Calls are detailed in the following.</p>
+
+<h1>
+<a id="lambdas" class="anchor" href="#lambdas" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lambdas</h1>
+
+<p>Lambda expressions are of the form:</p>
+
+<pre><code>(p1, p2, ... , pn) =&gt; { s1; s2; ... sn; }
+OR
+(p1, p2, ... , pn) =&gt; e
+</code></pre>
+
+<p>where p is a parameter name, s is a body statement, and e is an expression.</p>
+
+<p>For example:</p>
+
+<pre><code>(x, y) =&gt; x + y  
+
+(x, y) =&gt; { return x + y; }
+</code></pre>
+
+<p>are a valid lambda expressions. If the lambda has no body, the expression's value is implicitly returned.
+If the lambda has a body, then there must be an explicit return, otherwise null is returned by default.</p>
+
+<p>Lambda expressions can be used like functions when assigned to a variable.</p>
+
+<pre><code>var sum = (x, y) =&gt; {
+    return x + y;   
+};
+
+OR
+
+var sum = (x, y) =&gt; x + y;
+</code></pre>
+
+<p>Calling a lambda expression is of the form:</p>
+
+<pre><code>var a = 5;
+var z = sum(a, 4); //z would then be 9
+sum(a, 4); // is valid as well
+</code></pre>
+
+<h1>
+<a id="objects" class="anchor" href="#objects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Objects</h1>
+
+<p>Objects are of the form:</p>
+
+<pre><code>{
+    varDec1;
+    varDec2;
+    ...
+    varDecn;
+}
+</code></pre>
+
+<p>For example, to assign an Object to a variable:</p>
+
+<pre><code>var person = {
+    var name = "chris caruso";  
+    var age = 21;
+    var toString = () =&gt; name + ": " + age;
+};
+</code></pre>
+
+<p>Members of the object can be accessed as in the following example:</p>
+
+<pre><code>var myName = person.name;
+var myAge = person.age;
+var me = person.toString();
+var doubleAge = person.age * 2;
+</code></pre>
+
+<p>Assigning a member of an object is as follows:</p>
+
+<pre><code>person["name"] = "christopher a caruso";
+</code></pre>
+
+<p>*Assignment of an object's members is limited to the object's immediate members, not nested :&lt;
+*Objects are enumerable.</p>
+
+<h1>
+<a id="arrays" class="anchor" href="#arrays" aria-hidden="true"><span class="octicon octicon-link"></span></a>Arrays</h1>
+
+<p>Arrays are of the form:</p>
+
+<pre><code>    [e1, e2, ... , em](n)
+OR
+    [e1, e2, ... , en]
+</code></pre>
+
+<p>Where n and m are integers (m &lt;= n) and e is an expression.</p>
+
+<p>An Array's size can either be implicitly or explicitly defined.
+Example 1 explicitly defines a size of n with the pre-existing values 0 .. m
+Example 2 implicitly define a size of n as denoted by the number of existing expressions.</p>
+
+<p>Example of assigning an Array to a variable:</p>
+
+<pre><code>var arrayA = [1, 2, "sd", {}];
+
+OR
+
+var arrayB = [1, 2, "sd", {}](10);
+</code></pre>
+
+<p>arrayA has a size of 4, while arrayB has a size of 10.</p>
+
+<p>Uninitialized values in an explicitly sized array are defaulted to null.</p>
+
+<p>Indexing/Assigning an Array:</p>
+
+<pre><code>var a = arrayB[0];
+
+arrayB[7] = "e";
+</code></pre>
+
+<p>*Arrays are enumerable.</p>
+
+<h1>
+<a id="iteration" class="anchor" href="#iteration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Iteration</h1>
+
+<h3>
+<a id="foreach-statement" class="anchor" href="#foreach-statement" aria-hidden="true"><span class="octicon octicon-link"></span></a>Foreach statement</h3>
+
+<p>A foreach statement is used to iterate through an enumerable type.</p>
+
+<p>Enumerable types include Strings, Arrays, and Objects.</p>
+
+<p>The form of a foreach statement is as follows:</p>
+
+<pre><code>foreach (id in enumerable){
+    s1;
+    s2;
+    ...
+    sn;
+}
+</code></pre>
+
+<p>where id is an identifier (no declaration required, no var required) and enumerable is any enumerable type.
+s is a statement.</p>
+
+<p>The statements in the body will be executed for each enumerated expression in the enumerable, given to the 
+variable with the name id.</p>
+
+<p>For example:</p>
+
+<pre><code>var array = ["a", "b", "c"];
+
+foreach (item in array){
+    println(item);
+}
+</code></pre>
+
+<p>would print the value of each item in the array. </p>
+
+<p>Items in an object are anonymously enumerated.</p>
+
+<p>Strings of size 1 are to be expected from enumeration of a String. (each char in the string)</p>
+
+<h3>
+<a id="while-statement" class="anchor" href="#while-statement" aria-hidden="true"><span class="octicon octicon-link"></span></a>While statement</h3>
+
+<p>A while statement acts like a normal while statement would in C.</p>
+
+<p>It is of the form:</p>
+
+<pre><code>while (be1) {
+    s1;
+    s2;
+    ...
+        sn;
+}
+</code></pre>
+
+<p>where be is a boolean expression or an expression which can evaluate to a boolean value and s is a statement.</p>
+
+<p>The body statements will be executed for each iteration while the boolean expression is true.</p>
+
+<p>Everything except statements can evaluate to a boolean. Anything which is Null is false. If the expression is boolean, it assumes its value, otherwise, since it is not null, it is true.</p>
+
+<pre><code>            EXP.:  VALUE
+            ------------
+            null:  false
+            true:  true
+            false: false
+            else:  true
+</code></pre>
+
+<p>This will also apply to if statements later.</p>
+
+<h1>
+<a id="conditionals" class="anchor" href="#conditionals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conditionals</h1>
+
+<p>The if statement is the only form of condition control, other than a while statement.</p>
+
+<p>The work the same as they do in C. Except they must have a block.</p>
+
+<p>The if statement is of the following form:</p>
+
+<pre><code>if (be1){
+    s1;
+    s2;
+    ...
+    sn;
+}
+
+OR
+
+if (be1){
+    s1;
+    s2;
+    ...
+    sn;
+}
+else {
+    s1;
+    s2;
+    ...
+    sm;
+}
+</code></pre>
+
+<p>where be is a boolean expression and follows the same rules as detailed in the While statement section. </p>
+
+<h1>
+<a id="operators" class="anchor" href="#operators" aria-hidden="true"><span class="octicon octicon-link"></span></a>Operators</h1>
+
+<p>Operators include:</p>
+
+<pre><code>        +
+        -
+        /
+        *
+        ==
+        !=
+        |
+        &amp;
+        &lt;
+        &lt;=
+        &gt;
+        &gt;=
+        !
+        &lt;-
+        -&gt;
+</code></pre>
+
+<p>All operators work as normal. </p>
+
+<h3>
+<a id="--operator" class="anchor" href="#--operator" aria-hidden="true"><span class="octicon octicon-link"></span></a>&lt;- operator:</h3>
+
+<p>This operator can be used on an object to add an item to the end of an object anonymously </p>
+
+<p>var obj = { };</p>
+
+<pre><code>obj &lt;- 3;
+obj &lt;- 4;
+</code></pre>
+
+<p>the following operations can be conceptualized as:</p>
+
+<pre><code>// obj = { 3; 4; }; 
+
+OR
+
+can be used to remove the first item of an object:
+
+//cont from prev. example
+
+var b;
+
+b &lt;- obj;
+
+//b is 3
+</code></pre>
+
+<p>*Items added to an object anonymously can be access as above or during enumeration of a foreach statement.</p>
+
+<h3>
+<a id="--operator-1" class="anchor" href="#--operator-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>-&gt; operator:</h3>
+
+<p>This operator can be used on an object to remove the last item of the object.</p>
+
+<pre><code>var obj = { };
+
+obj &lt;- 3;
+obj &lt;- 4;
+
+var b;
+
+obj -&gt; b;
+
+//b is 4
+</code></pre>
+
+<h1>
+<a id="built-in-functions" class="anchor" href="#built-in-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Built in functions</h1>
+
+<h3>
+<a id="type-checks" class="anchor" href="#type-checks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Type checks</h3>
+
+<pre><code>isBool(e);
+isInt(e);
+isReal(e);
+isObject(e);
+isArray(e);
+isLambda(e);
+</code></pre>
+
+<h3>
+<a id="casts" class="anchor" href="#casts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Casts</h3>
+
+<pre><code>toInt(e);
+toReal(e);
+toString(e);
+toBool(e);
+</code></pre>
+
+<h3>
+<a id="other" class="anchor" href="#other" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other</h3>
+
+<pre><code>println(s);
+print(s);
+input();
+count(e); // returns the number of items in an enumerable
+empty(e); // returns if there are any items in an enumerable
+inject(s); // takes a string, evaluates it as code in the current line of execution
+</code></pre>
+
+<h1>
+<a id="concurrency" class="anchor" href="#concurrency" aria-hidden="true"><span class="octicon octicon-link"></span></a>CONCURRENCY!</h1>
+
+<h3>
+<a id="parallelization" class="anchor" href="#parallelization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parallelization</h3>
+
+<p>Parallelization is performed via use of a foreach statement.</p>
+
+<p>With the parallel modifier placed before a foreach statement, the foreach statement will execute each body block corresponding to an enumerated value in parallel. Note, this means the order is indeterminate.</p>
+
+<p>Foreach example:</p>
+
+<pre><code>var array = ["a", "b", "c", "d"];
+
+parallel foreach (item in array){
+    println(item);
+}
+</code></pre>
+
+<p>could result in printing the values in array in any order.</p>
+
+<h3>
+<a id="mutual-exclusion" class="anchor" href="#mutual-exclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mutual exclusion</h3>
+
+<p>Mutex like behavior can be exhibited through use of the lock statement.</p>
+
+<p>For example: </p>
+
+<pre><code>var a = 1;
+
+lock(a){
+    a = a + 1;
+}
+</code></pre>
+
+<p>Will only allow access to the variable a inside the block.</p>
+
+<p>Access to a other than inside the block statements will result in blocking the calling thread.</p>
+
+<h3>
+<a id="asynchronous-execution" class="anchor" href="#asynchronous-execution" aria-hidden="true"><span class="octicon octicon-link"></span></a>Asynchronous execution</h3>
+
+<p>Expressions can be execude currently in the background using the async modifier.</p>
+
+<p>async placed before any expression will start execution of the expression in a background thread and return control to the calling thread immediately. Though, the expression's value is not returned, an asynx expression in a busy state is. The value of the expession can be access by trying to evaluate the async expression AFTER it has returned the first time. If the async expression is still running, and is busy, the accessing thread will be blocked until the async expression has finished, and will return the evaluated value and return control to the accessing thread. </p>
+
+<p>For example:</p>
+
+<pre><code>var c = 0;
+
+var func = () =&gt; {              
+    while (c &lt; 3000000){
+        c = c + 1;
+    }
+    return c;
+};
+
+var count = async func();
+
+println("func is executing in the background...");
+
+//Busy time
+var i = 0;
+while (i &lt; 100000){
+    i = i + 1;
+}
+
+println("current value of c is " + c);
+
+println("final value is " + count); // blocks this thread and waits for the async func call to finish
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Csquared maintained by <a href="https://github.com/chcaru">chcaru</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
