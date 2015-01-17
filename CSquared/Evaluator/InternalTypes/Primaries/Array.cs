@@ -23,7 +23,6 @@ namespace CSquared
 
             var newArray = new Array
             {
-                //Closure = environment,
                 Expressions = this.Expressions,
                 SizeExpression = this.SizeExpression,
                 Value = new IExpression[arraySize]
