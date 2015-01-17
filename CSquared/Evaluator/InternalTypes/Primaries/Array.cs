@@ -13,7 +13,6 @@ namespace CSquared
         IIndexable, 
         IEnumerable<IExpression>
     {
-        //private CSquaredEnvironment Closure { get; set; }
 
         public override IExpression Initialize(CSquaredEnvironment environment)
         {
