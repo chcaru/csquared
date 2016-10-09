@@ -8,7 +8,7 @@ namespace CSquared
 {
     public partial class VariableDeclaration : IStatement
     {
-        public IExpression Evaluate(CSquaredEnvironment environment)
+        public virtual IExpression Evaluate(CSquaredEnvironment environment)
         {
             var variableIdentifier = this.IdentifierDeclaration.Identifier.Value.ToString();
 

@@ -91,7 +91,7 @@ namespace CSquared
 
         private VariableDeclaration VariableDeclaration()
         {
-            this.Match(LexemeType.Var);
+            this.Match(LexemeType.Arr);
 
             var identifierDeclaration = this.IdentifierDeclaration();
 
@@ -118,7 +118,7 @@ namespace CSquared
 
         private bool VariableDeclarationPending()
         {
-            return this.Check(LexemeType.Var);
+            return this.Check(LexemeType.Arr);
         }
 
         private IdentifierDeclaration IdentifierDeclaration()

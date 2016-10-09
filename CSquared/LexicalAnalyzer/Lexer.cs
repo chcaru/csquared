@@ -448,12 +448,22 @@ namespace CSquared
                         {
                             return new Lexeme
                             {
-                                Type = LexemeType.Var,
+                                Type = LexemeType.Arr, // Exactly the same as Legacy "LexemeType.Var"
                                 Value = currentLetters,
                                 LineNumber = this.Reader.LineNumber,
                                 LinePosition = this.Reader.LinePosition
                             };
                         }
+						else if (currentLetters == "arr")
+						{
+							return new Lexeme
+							{
+								Type = LexemeType.Arr,
+								Value = currentLetters,
+								LineNumber = this.Reader.LineNumber,
+								LinePosition = this.Reader.LinePosition
+							};
+						}
                         else if (currentLetters == "async")
                         {
                             return new Lexeme

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CSquared
 {
-    public partial class VariableAssignment : IStatement
+	public partial class VariableAssignment : VariableDeclaration
     {
-        public IExpression Evaluate(CSquaredEnvironment environment)
+        public override IExpression Evaluate(CSquaredEnvironment environment)
         {
             var variableIdentifier = this.Identifier.Value.ToString();
 
@@ -24,7 +24,8 @@ namespace CSquared
 
                 if (!environment.Lookup(variableIdentifier, out indexableExpression))
                 {
-                    throw new Exception("Attempted to assign value to undeclared variable " + variableIdentifier);
+					//throw new Exception("Attempted to assign value to undeclared variable " + variableIdentifier);
+					environment.Set(variableIdentifier, expression);
                 }
 
                 var indexable = indexableExpression.CastTo<IIndexable>();
@@ -33,7 +34,8 @@ namespace CSquared
             }
             else if (!environment.Update(variableIdentifier, expression))
             {
-                throw new Exception("Attempted to assign value to undeclared variable " + variableIdentifier);
+                //throw new Exception("Attempted to assign value to undeclared variable " + variableIdentifier);
+				environment.Set(variableIdentifier, expression);
             }
 
             return new Null();
