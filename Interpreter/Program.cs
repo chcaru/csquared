@@ -13,7 +13,7 @@ namespace Interpreter
         {
             if (args.Length <= 0)
             {
-                throw new Exception("Program name required as command line arguement!");
+				throw new Exception("Program name required as command line arguement!");
             }
 
             var parser = new Parser(args[0]);

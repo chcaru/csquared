@@ -1,0 +1,8 @@
+﻿foo = 30;
+foo = foo + 12;
+println(foo);
+array = ["Hel", "lo, ", "wor", "ld!"];
+foreach (item in array) {
+	print(item);
+}
+println("");

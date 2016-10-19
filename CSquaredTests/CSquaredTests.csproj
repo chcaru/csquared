@@ -79,6 +79,7 @@
     <None Include="TestPrograms\rpn.csqr">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="TestPrograms\pythonlike-vars.csqr" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSquared\CSquared.csproj">

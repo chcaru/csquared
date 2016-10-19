@@ -51,7 +51,7 @@ namespace CSquared
         To,
         Yield,
         Return,
-        Arr,
+        Var,
         Async,
         Parallel,
         Lock,
